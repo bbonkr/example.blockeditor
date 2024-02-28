@@ -11,7 +11,7 @@ export const PageSection = ({ section }: PageSectionProps) => {
     section.listType == PageSectionListType.List
       ? "flex flex-col"
       : section.listType == PageSectionListType.Grid
-      ? "grid grid-cols-2 gap-4"
+      ? "flex flex-col md:grid md:grid-cols-2 gap-3"
       : "";
 
   return (
