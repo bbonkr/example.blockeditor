@@ -50,7 +50,7 @@ export const PageBlock = ({ block }: PageBlockProps) => {
           </div>
         )}
 
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center">
           <p>{block.subtitle}</p>
           {(block.links ?? []).length > 0 && (
             <div className="flex flex-row gap-3 my-3">
