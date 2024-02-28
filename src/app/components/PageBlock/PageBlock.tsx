@@ -50,8 +50,15 @@ export const PageBlock = ({ block }: PageBlockProps) => {
           </div>
         )}
 
-        <div>
+        <div className="flex flex-row justify-between items-center">
           <p>{block.subtitle}</p>
+          {(block.links ?? []).length > 0 && (
+            <div className="flex flex-row gap-3 my-3">
+              {block.links.map((link) => (
+                <PageBlockLink key={link.id} link={link} />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     );
