@@ -1,12 +1,14 @@
 import { PageSectionModel } from "@/models/PageSectionModel";
 import { PageBlock } from "../PageBlock";
 import { PageSectionListType } from "@/models/PageSectionListType";
+import { FormKeyValueModel } from "@/models/FormKeyValueModel";
 
 type PageSectionProps = {
   section: PageSectionModel;
+  onSubmit?: (formValues: FormKeyValueModel[]) => void;
 };
 
-export const PageSection = ({ section }: PageSectionProps) => {
+export const PageSection = ({ section, onSubmit }: PageSectionProps) => {
   const classNames =
     section.listType == PageSectionListType.List
       ? "flex flex-col"
@@ -17,7 +19,7 @@ export const PageSection = ({ section }: PageSectionProps) => {
   return (
     <div id={`section-${section.id}`} className={`${classNames} my-3`}>
       {section.blocks.map((block) => (
-        <PageBlock key={block.id} block={block} />
+        <PageBlock key={block.id} block={block} onSubmit={onSubmit} />
       ))}
     </div>
   );
