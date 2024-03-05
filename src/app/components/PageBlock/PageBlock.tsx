@@ -47,14 +47,14 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
     formValue: string | number | undefined
   ) => {
     setFormValues((prevState) => {
-      const foundIndex = prevState.findIndex((x) => x.key === formName);
+      const foundIndex = prevState.findIndex((x) => x.key === formItem.name);
       if (foundIndex >= 0) {
         prevState.splice(foundIndex, 1, {
-          key: formName,
+          key: formItem.name,
           value: formValue?.toString(),
         });
       } else {
-        prevState.push({ key: formName, value: formValue?.toString() });
+        prevState.push({ key: formItem.name, value: formValue?.toString() });
       }
       return [...prevState];
     });
@@ -62,7 +62,7 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
 
   if (block.blockType === PageBlockType.Image) {
     return (
-      <div>
+      <div className={`${block.customStyle ?? ""}`}>
         <img src={block.imageThumbnailUrl} alt={block.name} />
       </div>
     );
@@ -70,7 +70,9 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
   if (block.blockType === PageBlockType.Title) {
     return (
       <div
-        className={`flex flex-col justify-between relative rounded-lg ${bgClassName}`}
+        className={`flex flex-col justify-between relative rounded-lg ${bgClassName} ${
+          block.customStyle ?? ""
+        }`}
         style={{ backgroundImage: bgImageUrl ? `url(${bgImageUrl})` : "" }}
       >
         {(block.icon || block.name) && (
@@ -105,7 +107,12 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
     return (
       <React.Fragment>
         <form onSubmit={handleSubmitForm}>
-          <div className="flex flex-row flex-wrap gap-3 items-center justify-between">
+          <div
+            className={` ${
+              block.customStyle ??
+              "flex flex-row flex-wrap gap-3 items-center justify-between"
+            }`}
+          >
             {block.formItems?.map((formItem) => (
               <PageBlockFormItem
                 key={formItem.id}
@@ -135,7 +142,9 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
   ) {
     return (
       <div
-        className={`flex flex-col justify-between relative rounded-lg ${bgClassName}`}
+        className={`flex flex-col justify-between relative rounded-lg ${bgClassName} ${
+          block.customStyle ?? ""
+        }`}
         style={{ backgroundImage: bgImageUrl ? `url(${bgImageUrl})` : "" }}
       >
         {(block.icon || block.name) && (
@@ -190,7 +199,9 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
   if (block.blockType === PageBlockType.ListItem) {
     return (
       <div
-        className={`flex flex-col justify-between relative rounded-lg ${bgClassName}`}
+        className={`flex flex-col justify-between relative rounded-lg ${bgClassName} ${
+          block.customStyle ?? ""
+        }`}
         style={{ backgroundImage: bgImageUrl ? `url(${bgImageUrl})` : "" }}
       >
         {(block.icon || block.name) && (
@@ -245,7 +256,9 @@ export const PageBlock = ({ block, debug, onSubmit }: PageBlockProps) => {
   // About or etc ... (Html content rendering)
   return (
     <div
-      className={`flex flex-col justify-between relative rounded-lg ${bgClassName}`}
+      className={`flex flex-col justify-between relative rounded-lg ${bgClassName} ${
+        block.customStyle ?? ""
+      }`}
       style={{ backgroundImage: bgImageUrl ? `url(${bgImageUrl})` : "" }}
     >
       {(block.icon || block.name) && (
