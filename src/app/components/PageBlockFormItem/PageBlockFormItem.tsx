@@ -26,7 +26,7 @@ export const PageBlockFormItem = ({
   const [checkedValues, setCheckedValues] = React.useState<string[]>([]);
 
   const formValue = useMemo(() => {
-    const keyValuePair = values?.find((x) => x.key === formName);
+    const keyValuePair = values?.find((x) => x.key === item.name);
     return keyValuePair?.value ?? "";
   }, [values]);
 
@@ -65,7 +65,7 @@ export const PageBlockFormItem = ({
 
   if (item.formItemType === PageBlockFormItemType.MultiLineText) {
     return (
-      <label className="flex flex-col w-full">
+      <label className={`flex flex-col ${item.customStyle ?? ""}`}>
         <span>
           {item.name} {showFormName && <small>({formName})</small>}
         </span>
@@ -77,6 +77,7 @@ export const PageBlockFormItem = ({
           rows={3}
           onChange={(e) => onChange && onChange(item, formName, e.target.value)}
           value={formValue}
+          required={item.required}
         />
       </label>
     );
@@ -84,7 +85,7 @@ export const PageBlockFormItem = ({
 
   if (item.formItemType === PageBlockFormItemType.Select) {
     return (
-      <label className="flex flex-col w-full">
+      <label className={`flex flex-col ${item.customStyle ?? ""}`}>
         <span>
           {item.name} {showFormName && <small>({formName})</small>}
         </span>
@@ -93,6 +94,7 @@ export const PageBlockFormItem = ({
           value={formValue}
           className="dark:bg-slate-800 dark:text-slate-200"
           onChange={(e) => onChange && onChange(item, formName, e.target.value)}
+          required={item.required}
         >
           {item.placeholder && (
             <option id={`select-option-${item.id}`} value="">
@@ -111,7 +113,7 @@ export const PageBlockFormItem = ({
 
   if (item.formItemType === PageBlockFormItemType.CheckBox) {
     return (
-      <div className="flex flex-col gap-3 w-full">
+      <div className={`flex flex-col gap-3 ${item.customStyle ?? ""}`}>
         <label>{item.name}</label>
         <div className="flex flex-row gap-3">
           {item.options?.map((option) => (
@@ -131,7 +133,7 @@ export const PageBlockFormItem = ({
 
   if (item.formItemType === PageBlockFormItemType.RadioButton) {
     return (
-      <div className="flex flex-col gap-3 w-full">
+      <div className={`flex flex-col gap-3 ${item.customStyle ?? ""}`}>
         <label>{item.name}</label>
         <div className="flex flex-row gap-3">
           {item.options?.map((option) => (
@@ -150,20 +152,28 @@ export const PageBlockFormItem = ({
     );
   }
 
+  const inputType =
+    item.formItemType === PageBlockFormItemType.Email
+      ? "email"
+      : item.formItemType === PageBlockFormItemType.PhoneNumber
+      ? "phone"
+      : "text";
+
   return (
-    <label className="flex flex-col w-full">
+    <label className={`flex flex-col ${item.customStyle ?? ""}`}>
       <span>
         {item.name}
         {showFormName && <small>({formName})</small>}
       </span>
       <input
-        type="text"
+        type={inputType}
         id={`formitem-${item.id}`}
         className="dark:bg-slate-800 dark:text-slate-200"
         name={formName}
         placeholder={item.placeholder}
         value={formValue}
         onChange={(e) => onChange && onChange(item, formName, e.target.value)}
+        required={item.required}
       />
     </label>
   );

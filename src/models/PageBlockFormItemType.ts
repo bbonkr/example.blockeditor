@@ -4,6 +4,10 @@ export const PageBlockFormItemType = {
   Select: "Select",
   CheckBox: "CheckBox",
   RadioButton: "RadioButton",
+  Email: "Email",
+  Specialties: "Specialties",
+  Services: "Services",
+  PhoneNumber: "PhoneNumber",
 } as const;
 
 export type PageBlockFormItemType =
