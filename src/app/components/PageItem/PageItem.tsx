@@ -1,7 +1,9 @@
+"use client";
 import { PageItemModel } from "@/models/PageItemModel";
 import { PageSection } from "../PageSection";
 import React from "react";
 import Head from "next/head";
+import { FormKeyValueModel } from "@/models/FormKeyValueModel";
 
 type PageItemProps = {
   item: PageItemModel;
@@ -9,6 +11,15 @@ type PageItemProps = {
 
 export const PageItem = ({ item }: PageItemProps) => {
   const siteName = "";
+
+  const handleSubmit = (formValues: FormKeyValueModel[]) => {
+    if (window) {
+      const formValueString = JSON.stringify(formValues, null, 2);
+
+      window.alert(formValueString);
+    }
+  };
+
   return (
     <React.Fragment>
       <Head>
@@ -21,7 +32,11 @@ export const PageItem = ({ item }: PageItemProps) => {
       <div>
         <div className="flex flex-col">
           {item.sections.map((section) => (
-            <PageSection key={section.id} section={section} />
+            <PageSection
+              key={section.id}
+              section={section}
+              onSubmit={handleSubmit}
+            />
           ))}
         </div>
       </div>

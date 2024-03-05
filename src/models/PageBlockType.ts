@@ -1,13 +1,11 @@
 export const PageBlockType = {
   Title: "Title",
-  Title1: "Title1",
-  Title2: "Title2",
-  Title3: "Title3",
-  Title4: "Title4",
+  Image: "Image",
   About: "About",
   ListItem: "ListItem",
   Award: "Award",
   Press: "Press",
+  Form: "Form",
 } as const;
 
 export type PageBlockType = (typeof PageBlockType)[keyof typeof PageBlockType];
