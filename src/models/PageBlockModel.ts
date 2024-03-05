@@ -2,6 +2,7 @@ import { PageBlockLinkModel } from "./PageBlockLinkModel";
 import { PageBlockLocationModel } from "./PageBlockLocationModel";
 import { MediaModel } from "./MediaModel";
 import { PageBlockType } from "./PageBlockType";
+import { PageBlockFormItemModel } from "./PageBlockFormItemModel";
 
 export type PageBlockModel = {
   id: string;
@@ -11,12 +12,15 @@ export type PageBlockModel = {
   customStyle?: string | null;
   order: number;
   name: string;
-  subtitle: string;
+  subtitle?: string;
   description?: string | null;
   overview?: string | null;
   content?: string | null;
   isConfirmed: boolean;
-  medias: MediaModel[];
-  links: PageBlockLinkModel[];
-  locations: PageBlockLocationModel[];
+  medias?: MediaModel[];
+  links?: PageBlockLinkModel[];
+  locations?: PageBlockLocationModel[];
+  formItems?: PageBlockFormItemModel[];
+  imageUrl?: string;
+  imageThumbnailUrl?: string;
 };
